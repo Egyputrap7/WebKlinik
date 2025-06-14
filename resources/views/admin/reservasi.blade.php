@@ -67,7 +67,9 @@
 
         </nav>
     </header>
-
+    @php
+        use Carbon\Carbon;
+    @endphp
     <!-- Konten -->
     <div class="flex items-center justify-center p-4">
         <div class="bg-white p-6 rounded shadow-md w-full max-w-full overflow-x-auto">
@@ -91,8 +93,13 @@
                     @forelse ($reservasis as $reservasi)
                         <tr class="hover:bg-gray-100">
                             <td class="py-2 px-4 border border-gray-200">{{ $reservasi->nama_pasien }}</td>
-                            <td class="py-2 px-4 border border-gray-200">{{ $reservasi->tanggal_lahir }}</td>
-                            <td class="py-2 px-4 border border-gray-200">{{ $reservasi->jadwal_reservasi }}</td>
+                            <td class="py-2 px-4 border border-gray-200">
+                                {{ \Carbon\Carbon::parse($reservasi->tanggal_lahir)->locale('id')->translatedFormat('l, d F Y') }}
+                            </td>
+                            <td class="py-2 px-4 border border-gray-200">
+                                {{ \Carbon\Carbon::parse($reservasi->jadwal_reservasi)->locale('id')->translatedFormat('l, d F Y') }}
+                            </td>
+
                             <td class="py-2 px-4 border border-gray-200">{{ $reservasi->umur }} th</td>
                             <td class="py-2 px-4 border border-gray-200 capitalize">{{ $reservasi->jenis_kelamin }}
                             </td>
