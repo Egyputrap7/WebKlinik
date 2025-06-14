@@ -26,9 +26,9 @@ Route::get('/form_reservasi', function () {
 })->middleware(['auth', 'prevent-back-history']);
 
 /* Simpan reservasi */
-Route::post('/user/reservasi', [ReservasiController::class, 'store'])
-    ->middleware(['auth', 'prevent-back-history']);
+Route::post('/user/reservasi', [ReservasiController::class, 'store'])->middleware(['auth', 'prevent-back-history']);
 Route::get('/reservasi/create/{tanggal}', [ReservasiController::class, 'create'])->name('reservasi.create');
+Route::get('/reservasi', [ReservasiController::class, 'index'])->name('reservasi.index')->middleware(['auth', 'prevent-back-history']);
 
 /* ---------- LOGIN USER ---------- */
 // Route::get('/layanan', [LayananController::class, 'index'])->middleware(['auth', 'prevent-back-history']);
@@ -78,7 +78,6 @@ Route::prefix('admin')->middleware(['auth.admin', 'prevent-back-history'])->grou
 Route::get('/auth/google', [GoogleController::class, 'redirectToGoogle'])->name('google.login');
 Route::get('/auth/google/callback', [GoogleController::class, 'handleGoogleCallback'])->name('google.callback');
 
-Route::get('/reservasi', [ReservasiController::class, 'index'])->name('reservasi.index');
 
 Route::get('/login', function () {
     return view('user.login');
