@@ -33,7 +33,7 @@ class ReservasiController extends Controller
             ];
         }
 
-        return view('user.layanan', compact('dates'));
+        return redirect()->route('user.layanan')->with('success', 'Reservasi berhasil');
     }
 
     // Tampilkan form reservasi untuk tanggal tertentu
